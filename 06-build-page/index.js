@@ -40,7 +40,7 @@ let templateHtml = '';
       if (extname(item) === '.css') {
         const stream = fs.createReadStream(resolve(stylesPath, item));
         stream.on('data', function(data) {
-          appendFile(bundleCCS, data);
+          appendFile(bundleCCS, data + '\n');
         });
       }
     }

@@ -16,7 +16,7 @@ const bundle = resolve(__dirname, 'project-dist', 'bundle.css');
       if (extname(item) === '.css') {
         const stream = fs.createReadStream(resolve(stylesPath, item));
         stream.on('data', function(data) {
-          appendFile(bundle, data);
+          appendFile(bundle, data + '\n');
         });
       }
     }
