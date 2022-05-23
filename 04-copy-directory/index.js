@@ -8,10 +8,12 @@ const filePathCopy = resolve(__dirname, 'files-copy');
     await rm(filePathCopy, { recursive: true, force: true });
     await mkdir(filePathCopy, { recursive: true });
 
-    const files = await readdir(resolve(filePath));
+    const files = await readdir(filePath, { withFileTypes: true });
 
     for (const file of files) {
-      await copyFile(resolve(__dirname, 'files', file), resolve(__dirname, 'files-copy', file));
+      if (file.isFile()) {
+        await copyFile(resolve(__dirname, 'files', file.name), resolve(__dirname, 'files-copy', file.name));
+      }
     }
     console.log('Copy done!');
   } catch (error) {
